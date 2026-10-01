@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "id": "python-kit",
+        "version": "0.1.0",
+        "description": "Python 编写指南和任务独立的 Python 执行环境",
+        "host": {
+          "os": [
+            "linux"
+          ],
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        "preparation": {
+          "granularity": "capability"
+        },
+        "permissions": {
+          "filesystem": "package-state-and-workspace",
+          "network": false
+        },
+        "provides": [
+          {
+            "id": "python.author",
+            "interfaceVersion": 1,
+            "kind": "guidance",
+            "description": "Python 编写与测试方法",
+            "instructions": "AUTHOR.md",
+            "tools": []
+          },
+          {
+            "id": "python.execute",
+            "interfaceVersion": 1,
+            "kind": "tools",
+            "description": "在任务独立的 Python 虚拟环境执行代码",
+            "instructions": "EXECUTE.md",
+            "tools": [
+              {
+                "name": "python_run",
+                "description": "Run Python code in the prepared task venv. No third-party dependencies are installed.",
+                "exposure": "on_activation",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          }
+        ],
+        "requires": [
+          {
+            "id": "shell.execute",
+            "interfaceVersion": 1,
+            "phase": "prepare",
+            "for": [
+              "python.execute"
+            ]
+          }
+        ],
+        "lifecycle": {
+          "runtime": "node",
+          "entry": "worker.mjs"
+        }
+      },
+      "sha256": "a5972a90cfb3762e32b7cb93bda99161a48136544afc42217d6adfb4f6260d2e",
+      "url": "https://raw.githubusercontent.com/saya-ashen/pi-capability-registry/main/releases/python-v1/a5972a90cfb3762e32b7cb93bda99161a48136544afc42217d6adfb4f6260d2e.json"
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "id": "remote-text",
+        "version": "0.1.0",
+        "description": "远程仓库演示：文本统计",
+        "host": {
+          "os": [
+            "linux"
+          ],
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        "preparation": {
+          "granularity": "capability"
+        },
+        "permissions": {
+          "filesystem": "package-state-and-workspace",
+          "network": false
+        },
+        "provides": [
+          {
+            "id": "text.statistics",
+            "interfaceVersion": 1,
+            "kind": "tools",
+            "description": "统计文本 text 的 Unicode 码点数量与空白分词数量",
+            "instructions": "USAGE.md",
+            "tools": [
+              {
+                "name": "text_statistics",
+                "description": "Count Unicode code points and whitespace-delimited words (not linguistic segmentation).",
+                "exposure": "on_activation",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          }
+        ],
+        "requires": [],
+        "lifecycle": {
+          "runtime": "node",
+          "entry": "worker.mjs"
+        }
+      },
+      "sha256": "372cb2fc800be90a1312c7dceaa92554625716b8bca209c314558c3353dff254",
+      "url": "https://raw.githubusercontent.com/saya-ashen/pi-capability-registry/main/releases/python-v1/372cb2fc800be90a1312c7dceaa92554625716b8bca209c314558c3353dff254.json"
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "id": "shell-kit",
+        "version": "0.1.0",
+        "description": "Host POSIX shell, used privately for package preparation unless explicitly requested",
+        "host": {
+          "os": [
+            "linux"
+          ],
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        "preparation": {
+          "granularity": "capability"
+        },
+        "permissions": {
+          "filesystem": "package-state-and-workspace",
+          "network": false
+        },
+        "provides": [
+          {
+            "id": "shell.execute",
+            "interfaceVersion": 1,
+            "kind": "tools",
+            "description": "Run a trusted shell command",
+            "tools": [
+              {
+                "name": "shell_run",
+                "description": "Execute an authorized shell command in the workspace. Not a sandbox.",
+                "exposure": "on_activation",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "command": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "command"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          }
+        ],
+        "requires": [],
+        "lifecycle": {
+          "runtime": "node",
+          "entry": "worker.mjs"
+        }
+      },
+      "sha256": "5081ab931b28c02365bde39a2bf34c724de4a013686aa2d3e01048b8a138b887",
+      "url": "https://raw.githubusercontent.com/saya-ashen/pi-capability-registry/main/releases/python-v1/5081ab931b28c02365bde39a2bf34c724de4a013686aa2d3e01048b8a138b887.json"
+    }
+  ]
+}

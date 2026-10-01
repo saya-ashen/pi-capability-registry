@@ -3,7 +3,11 @@
 A small, experimental public registry for capability-driven Minimal Pi applications.
 GitHub Raw serves static files; no registry server, installation hook or GitHub authentication is required.
 
-## Current package
+## Additional Python release
+
+The independent [python-v1 release](releases/python-v1/README.md) adds python-kit and its shell-kit preparation dependency for registry-only clients. It does not alter the original index or invalidate existing text-only trust configurations.
+
+## Original index package
 
 | Package | Capability | Tool |
 |---|---|---|
@@ -51,7 +55,7 @@ Do not commit local trust files, caches, credentials or `.env` files to this rep
 
 ## Boundaries
 
-- Experimental protocol v1; currently one example package, not a general marketplace.
+- Experimental protocol v1; the original text-only index and an additive Python dependency release, not a general marketplace.
 - HTTPS, fixed hashes, no redirects; no package signatures, auto-updates or private-registry authentication.
 - Hashes provide integrity, not proof that code is safe. Packages are NOT sandboxed.
 - `main` may change. A changed index requires deliberate local pin updates; old pins must fail rather than silently accept new code.

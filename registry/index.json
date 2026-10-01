@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "id": "remote-text",
+        "version": "0.1.0",
+        "description": "远程仓库演示：文本统计",
+        "host": {
+          "os": [
+            "linux"
+          ],
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        "preparation": {
+          "granularity": "capability"
+        },
+        "permissions": {
+          "filesystem": "package-state-and-workspace",
+          "network": false
+        },
+        "provides": [
+          {
+            "id": "text.statistics",
+            "interfaceVersion": 1,
+            "kind": "tools",
+            "description": "统计文本 text 的 Unicode 码点数量与空白分词数量",
+            "instructions": "USAGE.md",
+            "tools": [
+              {
+                "name": "text_statistics",
+                "description": "Count Unicode code points and whitespace-delimited words (not linguistic segmentation).",
+                "exposure": "on_activation",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          }
+        ],
+        "requires": [],
+        "lifecycle": {
+          "runtime": "node",
+          "entry": "worker.mjs"
+        }
+      },
+      "sha256": "372cb2fc800be90a1312c7dceaa92554625716b8bca209c314558c3353dff254",
+      "url": "https://raw.githubusercontent.com/saya-ashen/pi-capability-registry/main/registry/372cb2fc800be90a1312c7dceaa92554625716b8bca209c314558c3353dff254.json"
+    }
+  ]
+}

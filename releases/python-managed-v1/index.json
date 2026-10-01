@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "id": "general-coding",
+        "version": "0.1.0",
+        "description": "General coding guidance; alternative Python authoring provider",
+        "host": {
+          "os": [
+            "linux"
+          ],
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        "preparation": {
+          "granularity": "capability"
+        },
+        "permissions": {
+          "filesystem": "package-state-and-workspace",
+          "network": false
+        },
+        "provides": [
+          {
+            "id": "python.author",
+            "interfaceVersion": 1,
+            "kind": "guidance",
+            "description": "Python 编写：明确需求、小步实现、编写测试",
+            "instructions": "AUTHOR.md",
+            "tools": []
+          }
+        ],
+        "requires": [],
+        "lifecycle": {
+          "runtime": "node",
+          "entry": "worker.mjs"
+        }
+      },
+      "sha256": "a66ecdc7dac13e0422e1c948d08a44afe808918c73e2c6584145abf928934b6f",
+      "url": "https://raw.githubusercontent.com/saya-ashen/pi-capability-registry/main/releases/python-managed-v1/a66ecdc7dac13e0422e1c948d08a44afe808918c73e2c6584145abf928934b6f.json"
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "id": "python-managed",
+        "version": "0.1.0",
+        "description": "通过独立运行时资源准备任务 Python；宿主无需预装 Python",
+        "host": {
+          "os": [
+            "linux"
+          ],
+          "arch": [
+            "x64"
+          ]
+        },
+        "preparation": {
+          "granularity": "capability"
+        },
+        "permissions": {
+          "filesystem": "package-state-and-workspace",
+          "network": false
+        },
+        "provides": [
+          {
+            "id": "python.execute",
+            "interfaceVersion": 1,
+            "kind": "tools",
+            "description": "在依赖的固定 Python 运行时上创建任务 venv 并执行代码",
+            "instructions": "EXECUTE.md",
+            "tools": [
+              {
+                "name": "python_run",
+                "description": "Run code in a task venv backed by the approved Python runtime resource; standard library only.",
+                "exposure": "on_activation",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          }
+        ],
+        "requires": [
+          {
+            "id": "python.runtime",
+            "interfaceVersion": 1,
+            "phase": "runtime"
+          }
+        ],
+        "lifecycle": {
+          "runtime": "node",
+          "entry": "worker.mjs"
+        }
+      },
+      "sha256": "dc5bace72c1e15ed5c02d6148400bac0424114f4d0af7c48cc09092ee2912c5a",
+      "url": "https://raw.githubusercontent.com/saya-ashen/pi-capability-registry/main/releases/python-managed-v1/dc5bace72c1e15ed5c02d6148400bac0424114f4d0af7c48cc09092ee2912c5a.json"
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "id": "python-runtime",
+        "version": "0.1.0",
+        "description": "固定 CPython 3.13.15 运行时：复用匹配宿主，否则受控下载到私有缓存",
+        "host": {
+          "os": [
+            "linux"
+          ],
+          "arch": [
+            "x64"
+          ]
+        },
+        "preparation": {
+          "granularity": "capability"
+        },
+        "permissions": {
+          "filesystem": "package-state-and-workspace",
+          "network": "host-artifact"
+        },
+        "runtime": {
+          "kind": "python-standalone",
+          "version": "3.13.15",
+          "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260929/cpython-3.13.15%2B20260929-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+          "sha256": "c552deaf9ed0e678dee4ccc760d6dcd7cab33f1bd43e8037123b4a4db8508e14",
+          "maxBytes": 67108864,
+          "maxExtractedBytes": 268435456,
+          "executable": "python/bin/python3.13"
+        },
+        "provides": [
+          {
+            "id": "python.runtime",
+            "interfaceVersion": 1,
+            "kind": "resource",
+            "description": "提供经过运行探针验证的 Python 解释器路径，不曝光执行工具",
+            "instructions": "USAGE.md",
+            "tools": []
+          }
+        ],
+        "requires": [],
+        "lifecycle": {
+          "runtime": "node",
+          "entry": "worker.mjs"
+        }
+      },
+      "sha256": "21e12862c208d76c404b232043173c69187873f44e0a3ea4f06ca2d4e5bb62a0",
+      "url": "https://raw.githubusercontent.com/saya-ashen/pi-capability-registry/main/releases/python-managed-v1/21e12862c208d76c404b232043173c69187873f44e0a3ea4f06ca2d4e5bb62a0.json"
+    }
+  ]
+}

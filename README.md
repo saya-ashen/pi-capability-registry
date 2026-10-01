@@ -7,6 +7,8 @@ GitHub Raw serves static files; no registry server, installation hook or GitHub 
 
 The independent [python-v1 release](releases/python-v1/README.md) adds python-kit and its shell-kit preparation dependency for registry-only clients. It does not alter the original index or invalidate existing text-only trust configurations.
 
+A separate opt-in [managed Python release](releases/python-managed-v1/README.md) provides a pinned private runtime when a matching host Python is unavailable. It requires a new, explicit host-artifact download permission and does not change existing authorizations.
+
 ## Original index package
 
 | Package | Capability | Tool |
